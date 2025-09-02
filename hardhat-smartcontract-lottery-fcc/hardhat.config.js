@@ -1,6 +1,7 @@
 require("hardhat-deploy");
 require("hardhat-deploy-ethers"); // <-- add this
 require("@nomicfoundation/hardhat-toolbox");
+require("./tasks/block-number");
 require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -11,7 +12,7 @@ module.exports = {
     deployer: {
       default: 0, // first account as deployer
     },
-    signer: {
+    player: {
       default: 1, // second account as signer
     },
   },
@@ -21,6 +22,7 @@ module.exports = {
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 11155111,
       blockConfirmations: 6, // wait for 1 block confirmation
+      timeout: 120000,
     },
   },
   sourcify: {
@@ -38,17 +40,7 @@ module.exports = {
     noColors: false,
     // coinmarketcap: process.env.COINMARKETCAP_API_KEY,
   },
+  mocha: {
+    timeout: 300000, //300 seconds
+  },
 };
-
-// We can mention multiple version of solidity compiler
-// module.exports = {
-//   solidity: {
-//     compilers: [
-//       {
-//         version: "0.8.30",
-//       },
-//       {
-//         version: "0.6.6",
-//       },
-//     ],
-//   },

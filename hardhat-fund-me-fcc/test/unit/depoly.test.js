@@ -29,7 +29,9 @@ const { developmentChains } = require("../../helper-hardhat-config");
 
         //The actual contract being deployed is "MockV3Aggregator" (the contract in your codebase).
         //"MockAggregator" is the name you will use to reference this deployment
+
         mockAggregator = await ethers.getContract("MockAggregator", deployer);
+        // refer this image regarding - mock - hh-cc/ContractName-Vs-Deploymentname-Hardhat.png
       });
 
       it("Price feed address of Fund me should match", async function () {
