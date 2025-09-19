@@ -74,6 +74,7 @@ contract Raffle is VRFConsumerBaseV2Plus, AutomationCompatibleInterface {
     */
     function enterRaffle() public payable {
         // require msg.value to be at least entrance fee
+        // dummy console
         if (msg.value < i_entranceFee) {
             revert Raffle__NotEnoughETHEntered();
         }
@@ -99,14 +100,20 @@ contract Raffle is VRFConsumerBaseV2Plus, AutomationCompatibleInterface {
         bytes memory /* checkData */
     )
         public
+        view
         override
-        returns (bool upkeepNeeded, bytes memory /* performData */)
+        returns (bool upkeepNeeded, bytes memory performData)
     {
         bool isOpen = (s_raffleState == RaffleState.OPEN);
         bool timePassed = ((block.timestamp - s_lastTimeStamp) > i_interval);
         bool hasPlayers = (s_players.length > 0);
         bool hasBalance = address(this).balance > 0;
+        console.log("isOpen:", isOpen);
+        console.log("timePassed:", timePassed);
+        console.log("hasPlayers:", hasPlayers);
+        console.log("hasBalance:", hasBalance);
         upkeepNeeded = (isOpen && hasPlayers && hasBalance && timePassed);
+        performData = abi.encode(isOpen, timePassed, hasPlayers, hasBalance);
     }
 
     // function RequestedRandomWinner() external {

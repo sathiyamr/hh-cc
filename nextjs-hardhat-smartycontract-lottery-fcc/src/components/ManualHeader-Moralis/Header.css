@@ -1,0 +1,41 @@
+header {
+  padding: 1rem;
+  background: #6366f1;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.connect-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between button and text */
+}
+
+.connect-container button {
+  background-color: #10b981; /* green */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.connect-container button:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+}
+
+.connect-container button:active {
+  transform: translateY(0);
+}
+
+.connect-container p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #f9fafb; /* near white */
+}

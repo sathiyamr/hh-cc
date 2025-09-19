@@ -11,3 +11,8 @@ build/
 
 # Environment files
 .env
+
+
+# Hardhat files
+**/cache
+**/artifacts
