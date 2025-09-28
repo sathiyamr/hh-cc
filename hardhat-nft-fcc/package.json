@@ -1,0 +1,9 @@
+{
+  "name": "hardhat-nft-fcc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "hardhat": "^3.0.6"
+  }
+}
