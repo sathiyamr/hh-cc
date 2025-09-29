@@ -1,7 +1,6 @@
 require("hardhat-deploy");
 require("hardhat-deploy-ethers"); // <-- add this
 require("@nomicfoundation/hardhat-toolbox");
-require("./tasks/block-number");
 require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
