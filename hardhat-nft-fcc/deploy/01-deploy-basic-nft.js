@@ -17,7 +17,10 @@ module.exports = async (hre) => {
     waitConfirmations: network.config.blockConfirmations || 1, // wait for 1 block confirmation
   });
 
-  if (!developmentChains.includes(network.name)) {
+  if (
+    !developmentChains.includes(network.name) &&
+    process.env.ETHERSCAN_API_KEY
+  ) {
     // basicNft.address is the address of the deployed contract
 
     await verifyContract(basicNft.address, args);
