@@ -5,8 +5,22 @@ import "@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
 // import "@chainlink/contracts/src/v0.8/vrf/dev/interfaces/IVRFCoordinatorV2Plus.sol";
 import "@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
 
-error Raffle__NeedMoreETHSent();
+/*
+
+    Your contract is inheriting two different “ownership” systems:
+
+    Chainlink’s ConfirmedOwnerWithProposal → via VRFConsumerBaseV2Plus
+    This already has its own onlyOwner modifier.
+
+    OpenZeppelin’s Ownable
+    Which also has onlyOwner and owner().
+
+*/
+
+error RandomIpfsNft__NeedMoreETHSent();
+error RandomIpfsNft__withDrawFailed();
 
 contract RandomIpfsNft is VRFConsumerBaseV2Plus, ERC721URIStorage {
     uint256 private s_tokenCounter;
@@ -60,7 +74,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2Plus, ERC721URIStorage {
 
     function requestNft() public payable {
         if (msg.value < i_mintFee) {
-            revert Raffle__NeedMoreETHSent();
+            revert RandomIpfsNft__NeedMoreETHSent();
         }
         uint256 requestId = s_vrfCoordinator.requestRandomWords(
             VRFV2PlusClient.RandomWordsRequest({
@@ -96,6 +110,14 @@ contract RandomIpfsNft is VRFConsumerBaseV2Plus, ERC721URIStorage {
         emit NftMinted(s_tokenCounter, bredFrmModdeRng, dogOwner);
     }
 
+    function withDraw() public onlyOwner {
+        uint256 contractBalance = address(this).balance;
+        (bool success, ) = payable(owner()).call{value: contractBalance}("");
+        if (!success) {
+            revert RandomIpfsNft__withDrawFailed();
+        }
+    }
+
     function getBreedFromModdedRng(
         uint256 moddedRng
     ) private pure returns (Breed) {
@@ -126,7 +148,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2Plus, ERC721URIStorage {
     function getDogTokenUris(
         uint256 dogTokenIndex
     ) public view returns (string memory) {
-        s_dogTokenUris[dogTokenIndex];
+        return s_dogTokenUris[dogTokenIndex];
     }
 
     function getTokenCounter() public view returns (uint256) {
