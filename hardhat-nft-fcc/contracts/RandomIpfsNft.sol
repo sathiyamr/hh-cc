@@ -35,7 +35,6 @@ contract RandomIpfsNft is VRFConsumerBaseV2Plus, ERC721URIStorage {
     // IVRFCoordinatorV2Plus private immutable i_vrfCoordinator;
     bytes32 private immutable i_gasLane;
     uint256 private immutable i_subscriptionId;
-    uint256 private immutable i_interval;
     uint256 private immutable i_mintFee;
     bool private i_nativePayment;
 
@@ -55,7 +54,6 @@ contract RandomIpfsNft is VRFConsumerBaseV2Plus, ERC721URIStorage {
         address vrfCoordinatorV2Plus,
         bytes32 gasLane,
         uint256 subscriptionId,
-        uint32 interval,
         bool nativePayment,
         string[3] memory dogTokenUris,
         uint256 mintFee
@@ -66,7 +64,6 @@ contract RandomIpfsNft is VRFConsumerBaseV2Plus, ERC721URIStorage {
         // i_vrfCoordinator = IVRFCoordinatorV2Plus(vrfCoordinatorV2Plus);
         i_gasLane = gasLane;
         i_subscriptionId = subscriptionId;
-        i_interval = interval;
         i_nativePayment = nativePayment;
         _initializeContract(dogTokenUris);
         i_mintFee = mintFee;
