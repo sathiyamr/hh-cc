@@ -72,4 +72,61 @@ const {
           expect(Number(requestId)).to.equal(1);
         });
       });
+
+      describe("fulfillRandomWords", function () {
+        let txReceipt;
+        beforeEach(async () => {
+          const tx = await randomIpfsNft.requestNft({
+            value: ethers.parseEther("0.02"),
+          });
+          txReceipt = await tx.wait(1);
+        });
+
+        it("If invalid subscription id fails the fn call  ", async function () {
+          await expect(
+            vrfCoordinatorV2_5Mock.fulfillRandomWords(0, randomIpfsNft.target)
+          ).to.be.revertedWithCustomError(
+            vrfCoordinatorV2_5Mock,
+            "InvalidRequest"
+          );
+        });
+
+        it("success fn call", async function () {
+          new Promise(async (resolve, reject) => {
+            randomIpfsNft.once(
+              "NftMinted",
+              async (s_tokenCounter, bredFrmModdeRng, dogOwner) => {
+                // console.log(s_tokenCounter, bredFrmModdeRng, dogOwner);
+                // console.log(deployer);
+
+                expect(deployer).to.equal(dogOwner);
+                const contractBalance = await randomIpfsNft.getBalance();
+                expect(contractBalance).to.equal(ethers.parseEther("0.02"));
+
+                resolve();
+              }
+            );
+          });
+
+          const event = txReceipt.logs
+            .map((log) => randomIpfsNft.interface.parseLog(log))
+            .find((e) => e?.name === "RequestedNft");
+
+          const requestId = event?.args[0];
+
+          await vrfCoordinatorV2_5Mock.fulfillRandomWords(
+            requestId,
+            randomIpfsNft.target
+          );
+        });
+
+        it("balance of the contract + withDraw", async function () {
+          let contractBalance = await randomIpfsNft.getBalance();
+          expect(contractBalance).to.equal(ethers.parseEther("0.02"));
+          const tx = await randomIpfsNft.withDraw();
+          tx.wait(1);
+          contractBalance = await randomIpfsNft.getBalance();
+          expect(contractBalance).to.equal("0");
+        });
+      });
     });
