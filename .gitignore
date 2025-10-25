@@ -16,3 +16,15 @@ build/
 # Hardhat files
 **/cache
 **/artifacts
+
+
+# Hardhat Deploy generated deployments
+**/deployments/
+
+
+
+# VSCode settings
+**/.vscode/
+
+# OS generated files
+.DS_Store
