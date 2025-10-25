@@ -42,17 +42,18 @@ module.exports = async (hre) => {
   //  1 LINK = 1000000000000000000 juels
   // 	0.000000001 = 1000000000 juels
 
-  const args = [BASE_FEE, GAS_PRICE_LINK, WEIPERUNITLINK];
-
-  const VRFCoordinatorV2_5Mock = await deploy("VRFCoordinatorV2_5Mock", {
-    contract: "VRFCoordinatorV2_5Mock",
-    args: args, // constructor arguments
-    from: deployer,
-    log: true,
-    waitConfirmations: network.config.blockConfirmations || 1, // wait for 1 block confirmation
-  });
-  log("----------------------------------------------------");
-  log("VRFCoordinatorV2_5Mock deployed at " + VRFCoordinatorV2_5Mock.address);
+  if (developmentChains.includes(network.name)) {
+    const args = [BASE_FEE, GAS_PRICE_LINK, WEIPERUNITLINK];
+    const VRFCoordinatorV2_5Mock = await deploy("VRFCoordinatorV2_5Mock", {
+      contract: "VRFCoordinatorV2_5Mock",
+      args: args, // constructor arguments
+      from: deployer,
+      log: true,
+      waitConfirmations: network.config.blockConfirmations || 1, // wait for 1 block confirmation
+    });
+    log("----------------------------------------------------");
+    log("VRFCoordinatorV2_5Mock deployed at " + VRFCoordinatorV2_5Mock.address);
+  }
 };
 
-module.exports.tags = ["all", "mock-v2_5-coordinator"];
+module.exports.tags = ["all", "mock-v2_5-coordinator", "main"];

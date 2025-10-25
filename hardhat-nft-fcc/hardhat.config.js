@@ -5,7 +5,16 @@ require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.30",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.30",
+      },
+      {
+        version: "0.8.0",
+      },
+    ],
+  },
   defaultNetwork: "hardhat",
   namedAccounts: {
     deployer: {
@@ -28,9 +37,7 @@ module.exports = {
     enabled: true,
   },
   etherscan: {
-    apiKey: {
-      sepolia: process.env.ETHERSCAN_API_KEY,
-    },
+    apiKey: process.env.ETHERSCAN_API_KEY,
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS ? true : false,

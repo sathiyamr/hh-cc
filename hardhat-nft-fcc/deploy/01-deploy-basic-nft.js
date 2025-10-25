@@ -27,4 +27,4 @@ module.exports = async (hre) => {
   }
 };
 
-module.exports.tags = ["all", "basicnft"];
+module.exports.tags = ["all", "basicnft", "main"];

@@ -74,4 +74,13 @@ Random IPFS NFT
 
         Owner collects the ETH from the contract.
 
+    Pros -> Cheap
+    Cons -> Someone needs to pin our data
+
 Dynamic SVG NFT
+
+    Pros -> The data is on Chain
+    Cons -> Much more expensive
+
+    If Price is greater than X -> Happy face
+    If Price is Less than X -> Frown face

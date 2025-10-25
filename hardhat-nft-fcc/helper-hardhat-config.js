@@ -13,6 +13,7 @@ const networkConfig = {
     interval: "30", // 30 seconds
     nativePayment: false,
     mintFee: "20000000000000000", // 0.02 ETH
+    priceFeedAddress: process.env.SEPOLIA_PRICE_FEED_ADDRESS,
   },
   31337: {
     name: "localhost",
@@ -29,9 +30,14 @@ const networkConfig = {
   },
 };
 
+const INITIAL_ANSWER = "200000000000";
+const DECIMAL = 8; // 1 ETH in wei
+
 const developmentChains = ["hardhat", "localhost"];
 
 module.exports = {
   networkConfig,
   developmentChains,
+  INITIAL_ANSWER,
+  DECIMAL,
 };

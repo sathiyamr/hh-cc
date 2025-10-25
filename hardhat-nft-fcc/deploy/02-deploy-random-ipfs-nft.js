@@ -124,4 +124,4 @@ async function handleTokenUris() {
   return tokenUris;
 }
 
-module.exports.tags = ["all", "randomnft"];
+module.exports.tags = ["all", "randomnft", "main"];
