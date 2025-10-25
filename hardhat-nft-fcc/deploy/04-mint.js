@@ -61,4 +61,4 @@ module.exports = async (hre) => {
   );
 };
 
-module.exports.tags = ["all", "mint"];
+module.exports.tags = ["mint"];
