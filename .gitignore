@@ -31,3 +31,7 @@ build/
 
 
 **/gas-report.*
+
+**/coverage/
+
+**/coverage.json
