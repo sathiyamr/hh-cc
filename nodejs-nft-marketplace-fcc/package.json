@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-nft-marketplace-fcc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "yarn node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "moralis": "^2.27.2"
+  }
+}
