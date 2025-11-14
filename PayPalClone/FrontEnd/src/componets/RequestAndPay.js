@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DollarOutlined, SwapOutlined } from "@ant-design/icons";
 import { Modal, Input, InputNumber } from "antd";
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction  } from "wagmi";
-import { polygonMumbai } from "@wagmi/chains";
+import { sepolia } from "@wagmi/chains";
 import ABI from "../abi.json";
 
 function RequestAndPay({ requests, getNameAndBalance }) {
@@ -13,8 +13,8 @@ function RequestAndPay({ requests, getNameAndBalance }) {
   const [requestMessage, setRequestMessage] = useState("");
 
   const { config } = usePrepareContractWrite({
-    chainId: polygonMumbai.id,
-    address: "0x9c2BF50fE982515f41C084e316801BdA8C22a902",
+    chainId: sepolia.id,
+    address: "0x6ccBBf77B63c46f4B126D506153E990d4c29e342",
     abi: ABI,
     functionName: "payRequest",
     args: [0],
@@ -26,8 +26,8 @@ function RequestAndPay({ requests, getNameAndBalance }) {
   const { write, data } = useContractWrite(config);
 
   const { config: configRequest } = usePrepareContractWrite({
-    chainId: polygonMumbai.id,
-    address: "0x9c2BF50fE982515f41C084e316801BdA8C22a902",
+    chainId: sepolia.id,
+    address: "0x6ccBBf77B63c46f4B126D506153E990d4c29e342",
     abi: ABI,
     functionName: "createRequest",
     args: [requestAddress, requestAmount, requestMessage],

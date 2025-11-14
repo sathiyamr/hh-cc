@@ -54,7 +54,7 @@ function App() {
   useEffect(() => {
     if (!isConnected) return;
     getNameAndBalance();
-  }, [isConnected]);
+  }, [isConnected, address]);
 
   return (
     <div className="App">
