@@ -52,7 +52,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!isConnected) return;
+    if (!isConnected || !address) return;
     getNameAndBalance();
   }, [isConnected, address]);
 
@@ -90,7 +90,7 @@ function App() {
           )}
         </Header>
         <Content className="content">
-          {isConnected ? (
+          {isConnected  && address ? (
             <>
               <div className="firstColumn">
                 <CurrentBalance dollars={dollars} />

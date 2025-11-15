@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import { configureChains, mainnet, WagmiConfig, createClient } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import { polygonMumbai } from '@wagmi/chains';
+import { sepolia } from '@wagmi/chains';
 
 const { provider, webSocketProvider } = configureChains(
-  [mainnet, polygonMumbai],
+  [mainnet, sepolia],
   [publicProvider()]
 );
 

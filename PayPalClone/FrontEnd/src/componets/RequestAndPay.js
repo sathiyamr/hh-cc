@@ -19,7 +19,7 @@ function RequestAndPay({ requests, getNameAndBalance }) {
     functionName: "payRequest",
     args: [0],
     overrides: {
-      value: String(Number(requests["1"][0] * 1e18)),
+      value: String(Number(requests["1"][0] * 1000000000000000000)),
     },
   });
 
