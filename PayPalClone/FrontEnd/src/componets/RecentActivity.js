@@ -99,7 +99,7 @@ const columns = [
         style={record.type === "Send" ? { color: "red" } : { color: "green" }}
       >
         {record.type === "Send" ? "-" : "+"}
-        {record.amount} Matic
+        {record.amount} SepETH
       </div>
     ),
   },

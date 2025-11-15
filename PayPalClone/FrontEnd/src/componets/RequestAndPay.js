@@ -81,7 +81,7 @@ function RequestAndPay({ requests, getNameAndBalance }) {
         {requests && requests["0"].length > 0 && (
           <>
             <h2>Sending payment to {requests["3"][0]}</h2>
-            <h3>Value: {requests["1"][0]} Matic</h3>
+            <h3>Value: {requests["1"][0]} SepETH</h3>
             <p>"{requests["2"][0]}"</p>
           </>
         )}
@@ -97,7 +97,7 @@ function RequestAndPay({ requests, getNameAndBalance }) {
         okText="Proceed To Request"
         cancelText="Cancel"
       >
-        <p>Amount (Matic)</p>
+        <p>Amount (SepETH)</p>
         <InputNumber value={requestAmount} onChange={(val)=>setRequestAmount(val)}/>
         <p>From (address)</p>
         <Input placeholder="0x..." value={requestAddress} onChange={(val)=>setRequestAddress(val.target.value)}/>
