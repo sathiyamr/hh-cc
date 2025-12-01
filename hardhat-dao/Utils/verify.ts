@@ -1,6 +1,7 @@
-const { run } = require("hardhat");
+import { Address } from "hardhat-deploy/types";
+import { run } from "hardhat";
 
-const verifyContract = async (address, constructorArguments) => {
+const verifyContract = async (address: Address, constructorArguments: unknown[]) => {
   console.log("Verifying contract...");
   try {
     await run("verify:verify", {
@@ -13,6 +14,4 @@ const verifyContract = async (address, constructorArguments) => {
   }
 };
 
-module.exports = {
-  verifyContract,
-};
+export default verifyContract;

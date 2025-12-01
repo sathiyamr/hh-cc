@@ -1,10 +1,21 @@
-require("hardhat-deploy");
-require("hardhat-deploy-ethers"); // <-- add this
-require("@nomicfoundation/hardhat-toolbox");
-require("dotenv").config();
+import { HardhatUserConfig } from "hardhat/config";
+import "hardhat-deploy";
+import "@nomicfoundation/hardhat-toolbox";
+import "hardhat-deploy-ethers";
+import dotenv from "dotenv";
 
-/** @type import('hardhat/config').HardhatUserConfig */
-module.exports = {
+import "hardhat/types/config";
+
+declare module "hardhat/types/config" {
+  interface HttpNetworkUserConfig {
+    blockConfirmations?: number;
+    confirmations?: number;
+  }
+}
+
+dotenv.config();
+
+const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
@@ -25,18 +36,22 @@ module.exports = {
   defaultNetwork: "hardhat",
   namedAccounts: {
     deployer: {
-      default: 0, // first account as deployer
+      default: 0,
     },
     player: {
-      default: 1, // second account as signer
+      default: 1,
     },
   },
   networks: {
+    localhost: {
+      chainId: 31337,
+      blockConfirmations: 1,
+    },
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 11155111,
-      blockConfirmations: 6, // wait for 1 block confirmation
+      blockConfirmations: 6,
       timeout: 120000,
     },
   },
@@ -51,9 +66,10 @@ module.exports = {
     currency: "USD",
     outputFile: "gas-report.txt",
     noColors: false,
-    // coinmarketcap: process.env.COINMARKETCAP_API_KEY,
   },
   mocha: {
-    timeout: 300000, //300 seconds
+    timeout: 300000,
   },
 };
+
+export default config;
