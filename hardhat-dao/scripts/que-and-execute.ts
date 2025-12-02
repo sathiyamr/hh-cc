@@ -29,6 +29,39 @@ const queAndExecute = async () => {
     descriptionHash
   );
 
+  /* 
+
+  Your Doubt
+
+In queue-and-execute.ts, why do we need to pass all the same parameters again?
+Shouldn't we only pass proposalId or something like that?
+
+Reason
+
+The Governor contract does not store the actual data of the proposal in one place.
+Instead, proposals in OpenZeppelin are identified using a proposalId hash:
+
+proposalId = keccak256(abi.encode(targets, values, calldatas, descriptionHash))
+
+So during queue and execute steps, the contract needs the exact same parameters to:
+
+Recompute the proposal hash
+
+Match it with the stored proposal state
+
+That’s why queue() and execute() require:
+
+[targets],  // box.target
+[values],   // normally 0
+[calldatas], // encodedFunctionCall
+descriptionHash
+
+
+Even though you have the proposalId, you cannot pass only proposalId because the actual mechanism requires recomputing it from the same inputs.
+
+
+*/
+
   await queueTx.wait(1);
   if (developmentChains.includes(network.name)) {
     await moveTime(MIN_DELAY + 1);
