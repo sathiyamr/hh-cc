@@ -234,6 +234,7 @@ box.store(123)
 But when we send a transaction manually (e.g., inside a DAO proposal), we cannot call functions like this directly — we must send encoded bytes that Ethereum understands.
 
 
+--------
 
 
 que-and-execute.ts -> Your Doubt
